@@ -1,0 +1,12 @@
+<div class="nav">
+    <div class="nav__content flex align-c justify-b p-tb-10 p-lr-20 doc-width">
+        <a href="/" class="d-inline --title" style="color: var(--color-scheme);"><%=data.appShortName%></a>
+        <div class="flex align-c">
+            <% if (data.user) {%>
+            <a href="/logout" style="margin-left: 20px;">Log Out</a>
+            <% } %>
+            <a class="btn primary bordered" href="/create"
+                style="padding: 7px 10px; border-radius: 6px; text-transform: unset; margin-left: 20px;">Start a FundRaising</a>
+        </div>
+    </div>
+</div>

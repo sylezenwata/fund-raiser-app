@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="hero">
+            <div class="hero-content doc-width">
+                <h1 class="text-c" style="font-size: 45px; color: var(--light-color); text-shadow: 2px 2px #000;">Your help today <br />counts</h1>
+                <div class="search-form-wrap" style="margin-top: 30px;">
+                    <form action="/" method="GET" class="flex align-c">
+                        <div class="input-wrap" style="margin-top: 20px;">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <input type="search" class="form-input" name="filter"
+                                        title="Search ISBN, author, title, category or published year"
+                                        placeholder="Search those in need" value="<%=data.filter%>"
+                                        style="height: unset; padding: 20px 25px; border-radius: 35px; font-size: 16px;"
+                                        required>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary icon stroke-light m-l-10"
+                            style="padding: 20px 30px; width: auto; border-radius: 35px; height: unset; margin-top: 20px; font-size: 16px;">
+                            search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="collections doc-width">
+            <% if (data.filter?.length > 0) { %>
+            <div class="flex justify-e p-lr-20">
+                <a href="/" class="btn primary bordered" style="padding: 5px 8px;">Clear search</a>
+            </div>
+            <% } %>
+            <% 
+                for (let i = 0; i < data.fundings.length; i++) {
+            %>
+            <div class="--units flex flex-flow p-10 m-t-10">
+                <div class="box-hol">
+                    <div class="box" style="padding: 0;">
+                        <div class="--image"
+                            style="background: url(/images/<%=data.fundings[i].image%>) no-repeat top center; background-size: cover;">
+                        </div>
+                        <div class="p-10">
+                            <h2 class="m-b-10" style="font-size: 14px;"><%=data.fundings[i].title%></h2>
+                            <div class="m-t-10">
+                                <a href="/fundings/<%=data.fundings[i].id%>" class="btn secondary bordered d-inline" style="padding: 5px 10px;">Learn
+                                    more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+</body>
+
+</html>

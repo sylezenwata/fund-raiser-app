@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// gender types
+enum genderTypes {
+  Male
+  Female
+}
+
+// id types
+enum idTypes {
+  NIMC
+  voters_card
+  other
+}
+
+// user model
+model users {
+  id                   Int         @id @default(autoincrement())
+  firstName            String
+  lastName             String
+  email                String      @unique
+  phone                String?
+  gender               genderTypes
+  password             String      @db.VarChar(1000)
+  dateOfBirth          DateTime?
+  address              String?     @db.Text
+  profession           String?
+  fundRaiseLimit       Int         @default(2)
+  verificationIdType   idTypes?
+  verificationIdNumber String?
+  verificationIdValid  Boolean     @default(false)
+  blacklisted          Boolean     @default(false)
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  fundings             fundings[]
+  donations            donations[]
+  token                tokens[]
+}
+
+// token types
+enum tokenTypes {
+  login_session
+  email_verification
+  password_reset
+}
+
+// session token model
+model tokens {
+  id          Int        @id @default(autoincrement())
+  token       String
+  type        tokenTypes
+  ownerId     Int
+  owner       users      @relation(fields: [ownerId], references: [id])
+  reqIp       String?
+  expiresAt   DateTime
+  blacklisted Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+// funding model
+model fundings {
+  id            Int         @id @default(autoincrement())
+  title         String
+  description   String      @db.Text
+  image         String
+  accountNumber String
+  bankName      String
+  creatorId     Int
+  creator       users       @relation(fields: [creatorId], references: [id])
+  moneySent     Boolean     @default(false)
+  closed        Boolean     @default(false)
+  blacklisted   Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  donations     donations[]
+}
+
+// donations model
+model donations {
+  id          Int      @id @default(autoincrement())
+  remark      String?
+  fundingId   Int
+  funding     fundings @relation(fields: [fundingId], references: [id])
+  amount      String
+  donorEmail  String?
+  donor       users?   @relation(fields: [donorEmail], references: [email])
+  blacklisted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+    <style>
+        .form {
+            width: 525px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="main-panel p-tb-20 flex flex-col justify-c doc-width main">
+            <form id="donationForm" action="/<%=data.funding.id%>/donate" method="post" class="m-b-20">
+                <div class="form b-s-low">
+                    <div class="form-header">
+                        <h2 class="m-t-20" style="font-size: 18px; text-align: left;"><%=data.funding.title%></h2>
+                    </div>
+                    <div class="funding-details p-lr-20">
+                        <div class="--image">
+                            <img src="/images/<%=data.funding.image%>" alt="<%=data.funding.title%>">
+                        </div>
+                        <div class="flex flex-wrap justify-b align-c m-tb-10">
+                            <div class="flex align-c">
+                                <% 
+                                    let amountRaised = data.funding.donations.reduce((init, item) => {
+                                        init += parseInt(item.amount);
+                                        return init;
+                                    }, 0);
+                                    amountRaised = data.formatCurrency(amountRaised);
+                                %>
+                                <div class="p-tb-10 f-16 f-w-6"><%=amountRaised%> raised</div>
+                                <div class="m-l-10 m-r-10">|</div>
+                                <div class="p-tb-10 f-16 f-w-6"><%=data.funding.donations.length%> donations</div>
+                            </div>
+                            <% if (data.user?.id === data.funding.creatorId) {%>
+                            <button type="button" style="padding: 5px 10px;" class="btn primary bordered"
+                                data-close-funding="/<%=data.funding.id%>/close">Close</button>
+                            <% } %>
+                        </div>
+                        <p class="m-tb-10"><%=data.funding.description%></p>
+                    </div>
+                    <% if (!data.user) {%>
+                    <div class="p-tb-10 flex align-c p-lr-20">
+                        <p>Donate as anonymous, or &nbsp;</p>
+                        <a class="d-inline" href="/login?returnUrl=/fundings/<%=data.funding.id%>">Log In</a>
+                    </div>
+                    <% } %>
+                    <div class="form-body" data-form-body>
+                        <input type="hidden" name="donor" value="<%=data.user?.email%>">
+                        <div class="input-wrap" style="margin-top: 5px;">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Remark (optional)</span>
+                                    <input type="text" class="form-input" name="remark" placeholder="Enter remark" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Amount</span>
+                                    <input type="number" class="form-input" name="amount" placeholder="Enter amount"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Card number</span>
+                                    <input type="number" class="form-input" name="cardNumber"
+                                        placeholder="Enter card number" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group-wrap">
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>Card expiry</span>
+                                        <input type="text" class="form-input" name="cardExpiry"
+                                            placeholder="Enter card number" required />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>Card CVV</span>
+                                        <input type="number" class="form-input" name="cardCVV"
+                                            placeholder="Enter card number" required />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" class="btn primary w-100">
+                                Donate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+    <script type="module" src="/scripts/sub/funding.js"></script>
+</body>
+
+</html>

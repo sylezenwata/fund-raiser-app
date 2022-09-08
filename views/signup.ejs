@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+    <style>
+        .form {
+            width: 465px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="main-panel p-tb-20 flex flex-col justify-c doc-width main">
+            <form id="signUpForm" action="/signUp" method="post" class="m-b-20">
+                <div class="form b-s-low">
+                    <div class="form-header flex flex-col align-c">
+                        <h2 class="text-c m-t-20" style="font-size: 18px;">Sign Up</h2>
+                    </div>
+                    <div class="form-body" data-form-body>
+                        <input type="hidden" name="returnUrl" value="<%=data.returnUrl%>">
+                        <div class="input-group-wrap">
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>First name</span>
+                                        <input type="text" class="form-input" name="firstName"
+                                            placeholder="Enter first name" required />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>Last name</span>
+                                        <input type="text" class="form-input" name="lastName"
+                                            placeholder="Enter last name" required />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Email</span>
+                                    <input type="email" class="form-input" name="email" placeholder="Enter email"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group-wrap">
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>Phone</span>
+                                        <input type="text" class="form-input" name="phone"
+                                            placeholder="Enter phone number" required />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-wrap">
+                                <div class="form-input__wrap">
+                                    <label class="form-input__label">
+                                        <span>Gender</span>
+                                        <select name="gender" id="gender" class="form-input" required>
+                                            <option value="">Select gender</option>
+                                            <option>Female</option>
+                                            <option>Male</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Password</span>
+                                    <input type="password" class="form-input" name="password"
+                                        placeholder="Enter password" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" class="btn primary w-100">
+                                Sign Up
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="m-t-30">
+                <div class="text-mute text-c fw-600">Already have an account?</div>
+                <div class="f-18 text-c">
+                    <a href="/login">Log In</a>
+                </div>
+            </div>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+    <script type="module" src="/scripts/sub/signup.js"></script>
+</body>
+
+</html>

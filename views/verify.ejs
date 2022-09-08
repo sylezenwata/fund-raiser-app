@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="main-panel p-tb-20 flex flex-col justify-c doc-width main">
+            <form id="idVerificationForm" action="/verify" method="post" class="m-b-20">
+                <div class="form b-s-low">
+                    <div class="form-header flex flex-col align-c">
+                        <h2 class="text-c m-t-20" style="font-size: 18px;">ID Verification</h2>
+                    </div>
+                    <div class="form-body" data-form-body>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>ID type</span>
+                                    <select name="verificationIdType" id="verificationIdType" class="form-input"
+                                        required>
+                                        <option value="">Select ID type</option>
+                                        <option value="NIMC">NIMC</option>
+                                        <option value="voters_card">Voter's Card</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>ID number</span>
+                                    <input type="text" class="form-input" name="verificationIdNumber"
+                                        placeholder="Enter ID number" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" class="btn primary w-100">
+                                Verify
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+    <script type="module" src="/scripts/sub/verify.js"></script>
+</body>
+
+</html>

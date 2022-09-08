@@ -1,0 +1,17 @@
+{
+	"workbench.settings.editor": "json",
+	"[json]": {
+		"editor.tabSize": 2
+	},
+	"[javascript]": {
+		"editor.tabSize": 2
+	},
+	"files.autoSave": "off",
+	"files.associations": {
+		"*.ejs": "html"
+	},
+	"emmet.includeLanguages": {
+		"ejs": "html"
+	},
+	"html.format.templating": true
+}

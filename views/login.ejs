@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="main-panel p-tb-20 flex flex-col justify-c doc-width main">
+            <form id="loginForm" action="/login" method="post" class="m-b-20">
+                <div class="form b-s-low">
+                    <div class="form-header flex flex-col align-c">
+                        <h2 class="text-c m-t-20" style="font-size: 18px;">Login</h2>
+                    </div>
+                    <div class="form-body" data-form-body>
+                        <input type="hidden" name="returnUrl" value="<%=data.returnUrl%>">
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Email</span>
+                                    <input type="email" class="form-input" name="email" placeholder="Enter email"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Password</span>
+                                    <input type="password" class="form-input" name="password"
+                                        placeholder="Enter password" required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" class="btn primary w-100">
+                                Log In
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="m-t-30">
+                <div class="text-mute text-c fw-600">Don't have an account?</div>
+                <div class="f-18 text-c">
+                    <a href="/signup<%=data.returnUrl ? '?returnUrl='+data.returnUrl : '' %>">Sign Up</a>
+                </div>
+            </div>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+    <script type="module" src="/scripts/sub/login.js"></script>
+</body>
+
+</html>

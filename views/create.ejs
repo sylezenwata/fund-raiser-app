@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include('./partials/head.ejs')%>
+    <style>
+        .form {
+            width: 365px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <%-include('./partials/nav.ejs')%>
+        <div class="main-panel p-tb-20 flex flex-col justify-c doc-width main">
+            <form id="createFundingForm" action="/create" method="post" class="m-b-20">
+                <div class="form b-s-low">
+                    <div class="form-header flex flex-col align-c">
+                        <h2 class="text-c m-t-20" style="font-size: 18px;">Create a FundRaiser and start receiving
+                            donations now</h2>
+                    </div>
+                    <div class="form-body" data-form-body>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Image</span>
+                                    <input type="file" class="form-input" name="image" accept="image/*" placeholder="Enter title"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Title</span>
+                                    <input type="text" class="form-input" name="title" placeholder="Enter title"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Account number</span>
+                                    <input type="text" class="form-input" name="accountNumber" placeholder="Enter account number"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Bank name</span>
+                                    <input type="text" class="form-input" name="bankName" placeholder="Enter bank name"
+                                        required />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <div class="form-input__wrap">
+                                <label class="form-input__label">
+                                    <span>Description</span>
+                                    <textarea name="description" class="form-input" cols="30" rows="10"
+                                        placeholder="Enter description" required></textarea>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="submit" class="btn primary w-100">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%-include('./partials/footer.ejs')%>
+    </div>
+    <script type="module" src="/scripts/sub/create.js"></script>
+</body>
+
+</html>
