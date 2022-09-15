@@ -4,7 +4,7 @@ const ApiError = require("../utils/ApiError");
 const path = require("path");
 const { fs } = require("../utils/helpers");
 
-const userUploadPath = path.join(__dirname, "..", `/public/images`);
+const userUploadPath = path.join(__dirname, "..", `/public/images/uploads`);
 
 const donate = async (req, res, next) => {
 	try {
